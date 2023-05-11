@@ -230,6 +230,7 @@ header nav .toggle-menu {
 
 header nav>ul {
   display: flex;
+  align-items: center;
 }
 
 @media (max-width: 767px) {
@@ -745,10 +746,32 @@ header nav .icons i:hover {
 
 .project .box .image {
   padding: 50px;
+  position: relative;
+}
+
+.project .box .image::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
+.project .box:hover .image::before {
+  animation: flashing 0.7s;
+  -webkit-animation: flashing 0.7s;
 }
 
 .project .box img {
-  filter: grayscale(100%);
   width: 600px;
   max-width: 100%;
   box-shadow: 0 0 10px 0px #00000078;
@@ -757,12 +780,28 @@ header nav .icons i:hover {
   -moz-transition: var(--main-transition);
   -ms-transition: var(--main-transition);
   -o-transition: var(--main-transition);
-  -webkit-filter: grayscale(100%);
 }
 
-.project .box:hover img {
-  filter: grayscale(0);
-  -webkit-filter: grayscale(0);
+.project .box:hover .image img {
+  transform: translateY(-20px) scale(1.5);
+  -webkit-transform: translateY(-20px) scale(1.5);
+  -moz-transform: translateY(-20px) scale(1.5);
+  -ms-transform: translateY(-20px) scale(1.5);
+  -o-transform: translateY(-20px) scale(1.5);
+}
+
+@keyframes flashing {
+
+  0%,
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 200%;
+    height: 200%;
+  }
 }
 
 .project .box .caption {
